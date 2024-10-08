@@ -75,6 +75,13 @@ jobs:
         repo sync -c scripts/sd-fuse  --no-clone-bundle
         repo sync -c toolchain  --no-clone-bundle
 
+
+    - name: Add kenzok8 packages
+      run: |
+        cd project/friendlywrt
+        sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+        sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
+
     - name: Apply customizations
       run: |
         cd project

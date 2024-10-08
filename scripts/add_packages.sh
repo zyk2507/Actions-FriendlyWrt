@@ -11,6 +11,8 @@ cat >> configs/rockchip/01-nanopi <<EOL
 CONFIG_PACKAGE_luci-app-diskman=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
+CONFIG_PACKAGE_luci-app-adbyby-plus=y
+CONFIG_PACKAGE_luci-app-ssr-plus=y
 CONFIG_PACKAGE_smartmontools=y
 EOL
 # }}
