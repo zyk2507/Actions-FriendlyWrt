@@ -14,7 +14,6 @@ CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
 CONFIG_PACKAGE_luci-app-adbyby-plus=y
 CONFIG_PACKAGE_luci-app-ssr-plus=y
 CONFIG_PACKAGE_smartmontools=y
-CONFIG_PACKAGE_libparted=y
 EOL
 # }}
 

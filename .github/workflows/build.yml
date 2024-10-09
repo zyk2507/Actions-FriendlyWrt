@@ -119,14 +119,14 @@ jobs:
       continue-on-error: true
       run: |
         cd project/friendlywrt
-        make -j$(nproc) || make -j1 V=s
+        make -j$(($(nproc) * 2)) || make -j1 V=s
         echo $?
 
     - name: Check the result and try again
       if: steps.compile.outcome == 'failure'
       run: |
         cd project/friendlywrt
-        make -j4 V=s
+        make -j$(($(nproc) * 2)) || make -j1 V=s
 
     - name: Create rootfs package
       id: create_rootfs_package
