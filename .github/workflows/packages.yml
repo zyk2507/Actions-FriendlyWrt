@@ -86,5 +86,6 @@ jobs:
           echo "CONFIG_TARGET_rockchip_armv8_DEVICE_rk3328=y" >> .config
           make defconfig
           ./scripts/feeds update -a && ./scripts/feeds install -a
+          make -j1 V=s
 
       
