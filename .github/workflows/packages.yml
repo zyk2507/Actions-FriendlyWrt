@@ -71,4 +71,7 @@ jobs:
             echo "版本不支持，请选择 21.02.0 或 23.05.0。"
             exit 1
           fi
-          wget "$url" openwrt-sdk.tar.xz
+          wget -O ./openwrt-sdk.tar.xz "$url"
+          mkdir openwrt-sdk
+          tar -xf openwrt-sdk.tar.xz -C openwrt-sdk --strip-components 1
+          ls -al openwrt-sdk
