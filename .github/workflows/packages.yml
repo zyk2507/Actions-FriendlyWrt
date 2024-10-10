@@ -59,10 +59,6 @@ jobs:
         
       - name: SDK download
         run: |
-          # 根据版本去判断下载不同链接的SDK（使用完整的URL）
-          # 21.02.0 -> https://downloads.openwrt.org/releases/21.02.0/targets/rockchip/armv8/openwrt-sdk-21.02.0-rockchip-armv8_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-          # 23.05.0 -> https://downloads.openwrt.org/releases/23.05.0/targets/rockchip/armv8/openwrt-sdk-23.05.0-rockchip-armv8_gcc-12.3.0_musl.Linux-x86_64.tar.xz
-
           if [ "${{matrix.VERSION}}" = "21.02.0" ]; then
             url="https://downloads.openwrt.org/releases/21.02.0/targets/rockchip/armv8/openwrt-sdk-21.02.0-rockchip-armv8_gcc-8.4.0_musl.Linux-x86_64.tar.xz"
           elif [ "${{matrix.VERSION}}" = "23.05.0" ]; then
@@ -75,3 +71,20 @@ jobs:
           mkdir openwrt-sdk
           tar -xf openwrt-sdk.tar.xz -C openwrt-sdk --strip-components 1
           ls -al openwrt-sdk
+
+      - name: Add kenzok8 packages
+        run: |
+          cd openwrt-sdk
+          sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+          sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
+
+      - name: Update feeds
+        run: |
+          cd openwrt-sdk
+          make defconfig
+          echo "CONFIG_TARGET_rockchip_armv8=y" >> .config
+          echo "CONFIG_TARGET_rockchip_armv8_DEVICE_rk3328=y" >> .config
+          make defconfig
+          ./scripts/feeds update -a && ./scripts/feeds install -a
+
+      
